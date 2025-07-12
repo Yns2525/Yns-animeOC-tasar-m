@@ -1,75 +1,119 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Yns Anime OC Tasarım</title>
-<style>
-  body { font-family: Arial, sans-serif; background: #222; color: #eee; text-align: center; padding: 20px; }
-  #character { margin: 20px auto; width: 200px; height: 300px; background: #444; border-radius: 20px; position: relative; }
-  .part { position: absolute; width: 100%; height: 100%; }
-  .hair { top: 0; }
-  .eyes { top: 100px; }
-  .clothes { top: 200px; }
-  select { margin: 10px; padding: 5px; font-size: 16px; }
-  img { max-width: 100%; }
-</style>
+  <meta charset="UTF-8" />
+  <title>Yns Anime OC Creator</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to top, #a8e0ff, #ffffff);
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    header {
+      background: rgba(255, 255, 255, 0.5);
+      width: 100%;
+      padding: 1rem;
+      text-align: center;
+      font-size: 1.8rem;
+      font-weight: bold;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    #character {
+      position: relative;
+      width: 300px;
+      height: 400px;
+      margin-top: 30px;
+      background: url('https://i.imgur.com/UXbEBxN.png') no-repeat center/cover;
+      border: 2px solid white;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    }
+
+    .part {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+    }
+
+    .controls {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.4);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    select {
+      padding: 6px;
+      font-size: 16px;
+    }
+
+    label {
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
 
-<h1>Yns Anime OC Tasarım</h1>
+  <header>☁️ Yns OC Creator – Anime Karakterini Oluştur!</header>
 
-<div id="character">
-  <img id="hair" class="part hair" src="hair1.png" alt="Saç" />
-  <img id="eyes" class="part eyes" src="eyes1.png" alt="Gözler" />
-  <img id="clothes" class="part clothes" src="clothes1.png" alt="Kıyafet" />
-</div>
+  <div id="character">
+    <img id="body" class="part" src="images/body1.png" />
+    <img id="eyes" class="part" src="images/eyes1.png" />
+    <img id="hair" class="part" src="images/hair1.png" />
+  </div>
 
-<div>
-  <label>Saç Stili:
-    <select id="hairSelect">
-      <option value="hair1.png">Stil 1</option>
-      <option value="hair2.png">Stil 2</option>
-      <option value="hair3.png">Stil 3</option>
-    </select>
-  </label>
-</div>
-<div>
-  <label>Gözler:
-    <select id="eyesSelect">
-      <option value="eyes1.png">Göz 1</option>
-      <option value="eyes2.png">Göz 2</option>
-      <option value="eyes3.png">Göz 3</option>
-    </select>
-  </label>
-</div>
-<div>
-  <label>Kıyafet:
-    <select id="clothesSelect">
-      <option value="clothes1.png">Kıyafet 1</option>
-      <option value="clothes2.png">Kıyafet 2</option>
-      <option value="clothes3.png">Kıyafet 3</option>
-    </select>
-  </label>
-</div>
+  <div class="controls">
+    <label>Vücut:
+      <select id="bodySelect">
+        <option value="body1.png">Vücut 1</option>
+        <option value="body2.png">Vücut 2</option>
+      </select>
+    </label>
 
-<script>
-  const hair = document.getElementById('hair');
-  const eyes = document.getElementById('eyes');
-  const clothes = document.getElementById('clothes');
+    <label>Göz:
+      <select id="eyesSelect">
+        <option value="eyes1.png">Göz 1</option>
+        <option value="eyes2.png">Göz 2</option>
+      </select>
+    </label>
 
-  document.getElementById('hairSelect').addEventListener('change', (e) => {
-    hair.src = e.target.value;
-  });
+    <label>Saç:
+      <select id="hairSelect">
+        <option value="hair1.png">Saç 1</option>
+        <option value="hair2.png">Saç 2</option>
+      </select>
+    </label>
+  </div>
 
-  document.getElementById('eyesSelect').addEventListener('change', (e) => {
-    eyes.src = e.target.value;
-  });
+  <script>
+    const body = document.getElementById('body');
+    const eyes = document.getElementById('eyes');
+    const hair = document.getElementById('hair');
 
-  document.getElementById('clothesSelect').addEventListener('change', (e) => {
-    clothes.src = e.target.value;
-  });
-</script>
+    document.getElementById('bodySelect').addEventListener('change', (e) => {
+      body.src = 'images/' + e.target.value;
+    });
+
+    document.getElementById('eyesSelect').addEventListener('change', (e) => {
+      eyes.src = 'images/' + e.target.value;
+    });
+
+    document.getElementById('hairSelect').addEventListener('change', (e) => {
+      hair.src = 'images/' + e.target.value;
+    });
+  </script>
 
 </body>
-      </html>
+</html>
