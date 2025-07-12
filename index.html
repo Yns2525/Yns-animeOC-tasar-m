@@ -1,200 +1,154 @@
-<!DOCTYPE html><html lang="tr">
+<!DOCTYPE html>
+<html lang="tr">
 <head>
   <meta charset="UTF-8" />
-  <title>Yns Anime OC Creator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Yns Anime OC Tasarım</title>
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(to top, #a8e0ff, #ffffff);
-      font-family: 'Segoe UI', sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      overflow-x: hidden;
-    }header {
-  background: rgba(255, 255, 255, 0.5);
-  width: 100%;
-  padding: 1rem;
-  text-align: center;
-  font-size: 2rem;
-  font-weight: bold;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  backdrop-filter: blur(6px);
-}
-
-#character {
-  position: relative;
-  width: 300px;
-  height: 400px;
-  margin-top: 30px;
-  background: url('https://i.imgur.com/UXbEBxN.png') no-repeat center/cover;
-  border: 2px solid white;
-  border-radius: 12px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.2);
-  animation: float 6s ease-in-out infinite;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-
-.part {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-}
-
-.controls {
-  margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  background: rgba(255, 255, 255, 0.4);
-  padding: 20px 30px;
-  border-radius: 12px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.1);
-  backdrop-filter: blur(8px);
-}
-
-select {
-  padding: 8px;
-  font-size: 16px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-}
-
-label {
-  font-weight: bold;
-}
-
-.clouds {
-  background: url('https://i.imgur.com/n8pDlBk.png') repeat-x;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 200%;
-  height: 200px;
-  animation: cloudMove 60s linear infinite;
-  opacity: 0.3;
-  z-index: -1;
-}
-
-@keyframes cloudMove {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-
-.themes {
-  display: flex;
-  gap: 10px;
-  margin-top: 20px;
-}
-
-.theme-btn {
-  padding: 6px 12px;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-  font-weight: bold;
-  background: white;
-  transition: background 0.3s;
-}
-
-.theme-btn:hover {
-  background: #ddd;
-}
-
-.download-btn {
-  margin-top: 20px;
-  padding: 10px 20px;
-  border-radius: 8px;
-  background: #4caf50;
-  color: white;
-  border: none;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.download-btn:hover {
-  background: #45a049;
-}
-
+    /* Genel sayfa ayarları */
+    body, html {
+      margin: 0; padding: 0; height: 100%;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #222;
+      color: #eee;
+      overflow: hidden;
+    }
+    #container {
+      position: relative;
+      width: 400px;
+      height: 550px;
+      margin: 20px auto;
+      border-radius: 15px;
+      box-shadow: 0 0 25px rgba(255,255,255,0.15);
+      overflow: hidden;
+      background-color: rgba(0,0,0,0.7);
+    }
+    #background {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0; left: 0;
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.7);
+      z-index: 0;
+      transition: background-image 1s ease-in-out;
+    }
+    #character {
+      position: relative;
+      width: 280px;
+      height: 400px;
+      margin: 60px auto 0;
+      z-index: 1;
+      user-select: none;
+    }
+    .layer {
+      position: absolute;
+      top: 0; left: 0;
+      width: 280px;
+      height: 400px;
+      pointer-events: none;
+    }
+    /* Seçim panelleri */
+    #controls {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      margin-top: 15px;
+    }
+    select {
+      background: #333;
+      color: #eee;
+      border: none;
+      border-radius: 6px;
+      padding: 8px 12px;
+      margin: 0 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    select:hover {
+      background: #555;
+    }
   </style>
 </head>
-<body>  <div class="clouds"></div>  <header>☁️ Yns OC Creator – Anime Karakterini Oluştur!</header>  <div id="character">
-    <img id="body" class="part" src="images/body1.png" />
-    <img id="eyes" class="part" src="images/eyes1.png" />
-    <img id="hair" class="part" src="images/hair1.png" />
-  </div>  <div class="controls">
-    <label>Vücut:
-      <select id="bodySelect">
-        <option value="body1.png">Vücut 1</option>
-        <option value="body2.png">Vücut 2</option>
+<body>
+
+  <div id="container">
+    <div id="background"></div>
+    <div id="character">
+      <!-- Katmanlar: saç, göz, vücut -->
+      <img id="body" class="layer" src="https://i.imgur.com/GU0N4zf.png" alt="Body" />
+      <img id="hair" class="layer" src="https://i.imgur.com/kX3pj4W.png" alt="Hair" />
+      <img id="eyes" class="layer" src="https://i.imgur.com/CM89cAf.png" alt="Eyes" />
+    </div>
+
+    <div id="controls">
+      <select id="hairSelect" aria-label="Saç Seçimi">
+        <option value="https://i.imgur.com/kX3pj4W.png">Kısa Saç</option>
+        <option value="https://i.imgur.com/9B4K4QG.png">Uzun Saç</option>
+        <option value="https://i.imgur.com/t7vBoBz.png">Orta Saç</option>
       </select>
-    </label><label>Göz:
-  <select id="eyesSelect">
-    <option value="eyes1.png">Göz 1</option>
-    <option value="eyes2.png">Göz 2</option>
-  </select>
-</label>
 
-<label>Saç:
-  <select id="hairSelect">
-    <option value="hair1.png">Saç 1</option>
-    <option value="hair2.png">Saç 2</option>
-  </select>
-</label>
+      <select id="eyesSelect" aria-label="Göz Seçimi">
+        <option value="https://i.imgur.com/CM89cAf.png">Mavi Göz</option>
+        <option value="https://i.imgur.com/NxJwlZV.png">Yeşil Göz</option>
+        <option value="https://i.imgur.com/akPslcT.png">Kahverengi Göz</option>
+      </select>
 
-  </div>  <div class="themes">
-    <button class="theme-btn" onclick="setTheme('day')">☀️ Gündüz</button>
-    <button class="theme-btn" onclick="setTheme('night')">🌙 Gece</button>
-    <button class="theme-btn" onclick="setTheme('forest')">🌲 Orman</button>
-  </div><button class="download-btn" onclick="downloadCharacter()">📷 Karakteri İndir</button>
+      <select id="bodySelect" aria-label="Vücut Seçimi">
+        <option value="https://i.imgur.com/GU0N4zf.png">Açık Ten</option>
+        <option value="https://i.imgur.com/6rxLgqj.png">Esmer Ten</option>
+        <option value="https://i.imgur.com/bT65j9p.png">Orta Ten</option>
+      </select>
+
+      <select id="themeSelect" aria-label="Arka Plan Seçimi">
+        <option value="day">Gündüz</option>
+        <option value="sunset">Gün Batımı</option>
+        <option value="night">Gece</option>
+      </select>
+    </div>
+  </div>
 
   <script>
-    const body = document.getElementById('body');
-    const eyes = document.getElementById('eyes');
-    const hair = document.getElementById('hair');
-    const character = document.getElementById('character');
+    const hairImg = document.getElementById('hair');
+    const eyesImg = document.getElementById('eyes');
+    const bodyImg = document.getElementById('body');
+    const background = document.getElementById('background');
+    const themeSelect = document.getElementById('themeSelect');
 
-    document.getElementById('bodySelect').addEventListener('change', (e) => {
-      body.src = 'images/' + e.target.value;
-    });
-
-    document.getElementById('eyesSelect').addEventListener('change', (e) => {
-      eyes.src = 'images/' + e.target.value;
-    });
-
-    document.getElementById('hairSelect').addEventListener('change', (e) => {
-      hair.src = 'images/' + e.target.value;
-    });
-
+    // Arka plan görselleri (senin verdiğin linkler)
     function setTheme(theme) {
       switch(theme) {
         case 'day':
-          character.style.backgroundImage = "url('https://i.imgur.com/UXbEBxN.png')";
+          background.style.backgroundImage = "url('https://min-chi.material.jp/mc/materials/background-c/residential_street/_residential_street_1.jpg')";
+          break;
+        case 'sunset':
+          background.style.backgroundImage = "url('https://min-chi.material.jp/mc/materials/background-c/residential_street/_residential_street_2.jpg')";
           break;
         case 'night':
-          character.style.backgroundImage = "url('https://i.imgur.com/6xrfG6A.jpeg')";
-          break;
-        case 'forest':
-          character.style.backgroundImage = "url('https://i.imgur.com/I6TrCGF.jpeg')";
+          background.style.backgroundImage = "url('https://min-chi.material.jp/mc/materials/background-c/residential_street/_residential_street_3.jpg')";
           break;
       }
     }
 
-    function downloadCharacter() {
-      html2canvas(character).then(canvas => {
-        const link = document.createElement('a');
-        link.download = 'karakter.png';
-        link.href = canvas.toDataURL();
-        link.click();
-      });
-    }
-  </script>  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script></body>
+    // Seçim eventleri
+    document.getElementById('hairSelect').addEventListener('change', e => {
+      hairImg.src = e.target.value;
+    });
+    document.getElementById('eyesSelect').addEventListener('change', e => {
+      eyesImg.src = e.target.value;
+    });
+    document.getElementById('bodySelect').addEventListener('change', e => {
+      bodyImg.src = e.target.value;
+    });
+    themeSelect.addEventListener('change', e => {
+      setTheme(e.target.value);
+    });
+
+    // Sayfa yüklendiğinde varsayılan arka planı ayarla
+    window.onload = () => {
+      setTheme(themeSelect.value);
+    };
+  </script>
+</body>
 </html>
