@@ -3,44 +3,43 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Yns Anime OC Tasarım</title>
+  <title>Yns Anime OC Tasarım - Katmanlı</title>
   <style>
-    /* Genel sayfa ayarları */
     body, html {
       margin: 0; padding: 0; height: 100%;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #222;
-      color: #eee;
-      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      color: white;
+      user-select: none;
     }
     #container {
       position: relative;
-      width: 400px;
-      height: 550px;
-      margin: 20px auto;
-      border-radius: 15px;
-      box-shadow: 0 0 25px rgba(255,255,255,0.15);
-      overflow: hidden;
+      width: 300px;
+      height: 450px;
       background-color: rgba(0,0,0,0.7);
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 0 20px #000;
     }
     #background {
       position: absolute;
-      width: 100%;
-      height: 100%;
+      width: 100%; height: 100%;
       top: 0; left: 0;
       background-size: cover;
       background-position: center;
       filter: brightness(0.7);
       z-index: 0;
-      transition: background-image 1s ease-in-out;
+      transition: background-image 0.7s ease;
     }
     #character {
       position: relative;
       width: 280px;
       height: 400px;
-      margin: 60px auto 0;
+      margin: 25px auto 0;
       z-index: 1;
-      user-select: none;
     }
     .layer {
       position: absolute;
@@ -49,12 +48,11 @@
       height: 400px;
       pointer-events: none;
     }
-    /* Seçim panelleri */
     #controls {
-      position: relative;
-      z-index: 2;
+      margin-top: 20px;
       text-align: center;
-      margin-top: 15px;
+      z-index: 2;
+      position: relative;
     }
     select {
       background: #333;
@@ -63,7 +61,7 @@
       border-radius: 6px;
       padding: 8px 12px;
       margin: 0 6px;
-      font-size: 16px;
+      font-size: 14px;
       cursor: pointer;
     }
     select:hover {
@@ -73,82 +71,82 @@
 </head>
 <body>
 
-  <div id="container">
-    <div id="background"></div>
-    <div id="character">
-      <!-- Katmanlar: saç, göz, vücut -->
-      <img id="body" class="layer" src="https://i.imgur.com/GU0N4zf.png" alt="Body" />
-      <img id="hair" class="layer" src="https://i.imgur.com/kX3pj4W.png" alt="Hair" />
-      <img id="eyes" class="layer" src="https://i.imgur.com/CM89cAf.png" alt="Eyes" />
-    </div>
-
-    <div id="controls">
-      <select id="hairSelect" aria-label="Saç Seçimi">
-        <option value="https://i.imgur.com/kX3pj4W.png">Kısa Saç</option>
-        <option value="https://i.imgur.com/9B4K4QG.png">Uzun Saç</option>
-        <option value="https://i.imgur.com/t7vBoBz.png">Orta Saç</option>
-      </select>
-
-      <select id="eyesSelect" aria-label="Göz Seçimi">
-        <option value="https://i.imgur.com/CM89cAf.png">Mavi Göz</option>
-        <option value="https://i.imgur.com/NxJwlZV.png">Yeşil Göz</option>
-        <option value="https://i.imgur.com/akPslcT.png">Kahverengi Göz</option>
-      </select>
-
-      <select id="bodySelect" aria-label="Vücut Seçimi">
-        <option value="https://i.imgur.com/GU0N4zf.png">Açık Ten</option>
-        <option value="https://i.imgur.com/6rxLgqj.png">Esmer Ten</option>
-        <option value="https://i.imgur.com/bT65j9p.png">Orta Ten</option>
-      </select>
-
-      <select id="themeSelect" aria-label="Arka Plan Seçimi">
-        <option value="day">Gündüz</option>
-        <option value="sunset">Gün Batımı</option>
-        <option value="night">Gece</option>
-      </select>
-    </div>
+<div id="container">
+  <div id="background"></div>
+  <div id="character">
+    <img id="body" class="layer" src="https://i.imgur.com/GU0N4zf.png" alt="Body" />
+    <img id="hair" class="layer" src="https://i.imgur.com/kX3pj4W.png" alt="Hair" />
+    <img id="eyes" class="layer" src="https://i.imgur.com/CM89cAf.png" alt="Eyes" />
   </div>
 
-  <script>
-    const hairImg = document.getElementById('hair');
-    const eyesImg = document.getElementById('eyes');
-    const bodyImg = document.getElementById('body');
-    const background = document.getElementById('background');
-    const themeSelect = document.getElementById('themeSelect');
+  <div id="controls">
+    <select id="hairSelect" aria-label="Saç Seçimi">
+      <option value="https://i.imgur.com/kX3pj4W.png">Kısa Saç</option>
+      <option value="https://i.imgur.com/9B4K4QG.png">Uzun Saç</option>
+      <option value="https://i.imgur.com/t7vBoBz.png">Orta Saç</option>
+    </select>
 
-    // Arka plan görselleri (senin verdiğin linkler)
-    function setTheme(theme) {
-      switch(theme) {
-        case 'day':
-          background.style.backgroundImage = "url('https://min-chi.material.jp/mc/materials/background-c/residential_street/_residential_street_1.jpg')";
-          break;
-        case 'sunset':
-          background.style.backgroundImage = "url('https://min-chi.material.jp/mc/materials/background-c/residential_street/_residential_street_2.jpg')";
-          break;
-        case 'night':
-          background.style.backgroundImage = "url('https://min-chi.material.jp/mc/materials/background-c/residential_street/_residential_street_3.jpg')";
-          break;
-      }
+    <select id="eyesSelect" aria-label="Göz Seçimi">
+      <option value="https://i.imgur.com/CM89cAf.png">Mavi Göz</option>
+      <option value="https://i.imgur.com/NxJwlZV.png">Yeşil Göz</option>
+      <option value="https://i.imgur.com/akPslcT.png">Kahverengi Göz</option>
+    </select>
+
+    <select id="bodySelect" aria-label="Vücut Seçimi">
+      <option value="https://i.imgur.com/GU0N4zf.png">Açık Ten</option>
+      <option value="https://i.imgur.com/6rxLgqj.png">Esmer Ten</option>
+      <option value="https://i.imgur.com/bT65j9p.png">Orta Ten</option>
+    </select>
+
+    <select id="themeSelect" aria-label="Arka Plan Seçimi">
+      <option value="day">Gündüz</option>
+      <option value="sunset">Gün Batımı</option>
+      <option value="night">Gece</option>
+    </select>
+  </div>
+</div>
+
+<script>
+  const hairImg = document.getElementById('hair');
+  const eyesImg = document.getElementById('eyes');
+  const bodyImg = document.getElementById('body');
+  const background = document.getElementById('background');
+  const themeSelect = document.getElementById('themeSelect');
+
+  function setTheme(theme) {
+    switch(theme) {
+      case 'day':
+        background.style.backgroundImage = "url('https://min-chi.material.jp/mc/materials/background-c/residential_street/_residential_street_1.jpg')";
+        break;
+      case 'sunset':
+        background.style.backgroundImage = "url('https://min-chi.material.jp/mc/materials/background-c/residential_street/_residential_street_2.jpg')";
+        break;
+      case 'night':
+        background.style.backgroundImage = "url('https://min-chi.material.jp/mc/materials/background-c/residential_street/_residential_street_3.jpg')";
+        break;
     }
+  }
 
-    // Seçim eventleri
-    document.getElementById('hairSelect').addEventListener('change', e => {
-      hairImg.src = e.target.value;
-    });
-    document.getElementById('eyesSelect').addEventListener('change', e => {
-      eyesImg.src = e.target.value;
-    });
-    document.getElementById('bodySelect').addEventListener('change', e => {
-      bodyImg.src = e.target.value;
-    });
-    themeSelect.addEventListener('change', e => {
-      setTheme(e.target.value);
-    });
+  document.getElementById('hairSelect').addEventListener('change', e => {
+    hairImg.src = e.target.value;
+  });
 
-    // Sayfa yüklendiğinde varsayılan arka planı ayarla
-    window.onload = () => {
-      setTheme(themeSelect.value);
-    };
-  </script>
+  document.getElementById('eyesSelect').addEventListener('change', e => {
+    eyesImg.src = e.target.value;
+  });
+
+  document.getElementById('bodySelect').addEventListener('change', e => {
+    bodyImg.src = e.target.value;
+  });
+
+  themeSelect.addEventListener('change', e => {
+    setTheme(e.target.value);
+  });
+
+  window.onload = () => {
+    setTheme(themeSelect.value);
+  };
+</script>
+
 </body>
 </html>
